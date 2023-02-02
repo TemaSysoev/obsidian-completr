@@ -22,3 +22,4 @@ blacklisted_suggestions.txt
 callout_suggestions.json
 latex_commands.json
 wordLists
+.DS_Store

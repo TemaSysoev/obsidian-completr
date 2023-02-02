@@ -195,7 +195,15 @@ export default class SuggestionPopup extends EditorSuggest<Suggestion> {
         const self = this as any;
         self.suggestions.useSelectedItem();
     }
-
+    applyFirstItem() {
+        const self = this as any;
+        self.suggestions.setSelectedItem(0);
+    }
+    applyItemWithIndex(index: number) {
+        const self = this as any;
+        self.suggestions.setSelectedItem(index);
+        self.suggestions.useSelectedItem();
+    }
     isVisible(): boolean {
         return (this as any).isOpen;
     }

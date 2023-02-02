@@ -52,8 +52,8 @@ export default class CompletrPlugin extends Plugin {
 
         const isHotkeyMatch = (hotkey: any, context: KeymapContext, isBypassCommand: boolean): boolean => {
             //Copied from original isMatch function, modified to not require exactly the same modifiers for
-            // completr-bypass commands. This allows triggering for example Ctrl+Enter even when
-            // pressing Ctrl+Shift+Enter. The additional modifier is then passed to the editor.
+            // completr-bypass commands. This allows triggering for example Ctrl+Tab even when
+            // pressing Ctrl+Shift+Tab. The additional modifier is then passed to the editor.
 
             /* Original isMatch function:
             var n = e.modifiers
@@ -152,7 +152,7 @@ export default class CompletrPlugin extends Plugin {
             isVisible: () => this._suggestionPopup.isVisible(),
         });
         this.addCommand({
-            id: 'completr-insert-selected-suggestion',
+            id: 'completr-insert-selected-suggestion-enter',
             name: 'Insert selected suggestion',
             hotkeys: [
                 {
@@ -166,11 +166,95 @@ export default class CompletrPlugin extends Plugin {
             isVisible: () => this._suggestionPopup.isVisible(),
         });
         this.addCommand({
-            id: 'completr-bypass-enter-key',
-            name: 'Bypass the popup and press Enter',
+            id: 'completr-insert-selected-suggestion-tab',
+            name: 'Insert selected suggestion',
             hotkeys: [
                 {
-                    key: "Enter",
+                    key: "Tab",
+                    modifiers: []
+                }
+            ],
+            editorCallback: (_) => this.suggestionPopup.applySelectedItem(),
+            // @ts-ignore
+            isBypassCommand: () => !this._suggestionPopup.isFocused(),
+            isVisible: () => this._suggestionPopup.isVisible(),
+        });
+        this.addCommand({
+            id: 'completr-insert-first-suggestion',
+            name: 'Insert first suggestion',
+            hotkeys: [
+                {
+                    key: "1",
+                    modifiers: ["Ctrl"]
+                }
+            ],
+            editorCallback: (_) => this.suggestionPopup.applyItemWithIndex(0),
+            // @ts-ignore
+            isBypassCommand: () => !this._suggestionPopup.isFocused(),
+            isVisible: () => this._suggestionPopup.isVisible(),
+        });
+        this.addCommand({
+            id: 'completr-insert-second-suggestion',
+            name: 'Insert second suggestion',
+            hotkeys: [
+                {
+                    key: "2",
+                    modifiers: ["Ctrl"]
+                }
+            ],
+            editorCallback: (_) => this.suggestionPopup.applyItemWithIndex(1),
+            // @ts-ignore
+            isBypassCommand: () => !this._suggestionPopup.isFocused(),
+            isVisible: () => this._suggestionPopup.isVisible(),
+        });
+        this.addCommand({
+            id: 'completr-insert-third-suggestion',
+            name: 'Insert third suggestion',
+            hotkeys: [
+                {
+                    key: "3",
+                    modifiers: ["Ctrl"]
+                }
+            ],
+            editorCallback: (_) => this.suggestionPopup.applyItemWithIndex(2),
+            // @ts-ignore
+            isBypassCommand: () => !this._suggestionPopup.isFocused(),
+            isVisible: () => this._suggestionPopup.isVisible(),
+        });
+        this.addCommand({
+            id: 'completr-insert-fourth-suggestion',
+            name: 'Insert fourth suggestion',
+            hotkeys: [
+                {
+                    key: "4",
+                    modifiers: ["Ctrl"]
+                }
+            ],
+            editorCallback: (_) => this.suggestionPopup.applyItemWithIndex(3),
+            // @ts-ignore
+            isBypassCommand: () => !this._suggestionPopup.isFocused(),
+            isVisible: () => this._suggestionPopup.isVisible(),
+        });
+        this.addCommand({
+            id: 'completr-insert-fifth-suggestion',
+            name: 'Insert fifth suggestion',
+            hotkeys: [
+                {
+                    key: "5",
+                    modifiers: ["Ctrl"]
+                }
+            ],
+            editorCallback: (_) => this.suggestionPopup.applyItemWithIndex(4),
+            // @ts-ignore
+            isBypassCommand: () => !this._suggestionPopup.isFocused(),
+            isVisible: () => this._suggestionPopup.isVisible(),
+        });
+        this.addCommand({
+            id: 'completr-bypass-enter-key',
+            name: 'Bypass the popup and press Tab',
+            hotkeys: [
+                {
+                    key: "Tab",
                     modifiers: ["Ctrl"]
                 }
             ],
@@ -180,6 +264,7 @@ export default class CompletrPlugin extends Plugin {
             isBypassCommand: () => true,
             isVisible: () => this._suggestionPopup.isVisible(),
         });
+        
         this.addCommand({
             id: 'completr-bypass-tab-key',
             name: 'Bypass the popup and press Tab',
@@ -231,7 +316,7 @@ export default class CompletrPlugin extends Plugin {
             name: 'Jump to next snippet placeholder',
             hotkeys: [
                 {
-                    key: "Enter",
+                    key: "Tab",
                     modifiers: []
                 }
             ],
@@ -263,7 +348,7 @@ export default class CompletrPlugin extends Plugin {
 
         // Here are some notes about this command and the isBypassCommand function:
         // - This command is registered last so that other hotkeys can be bound to tab without being overridden
-        // - The isBypassCommand function exists, because obsidian has editor suggest related event handlers for Enter,
+        // - The isBypassCommand function exists, because obsidian has editor suggest related event handlers for Tab,
         //   Tab, ArrowUp and ArrowDown which completely prevent those keys from getting to the editor while an editor
         //   suggest is open. This function bypasses that using the custom hotkey hook above which will dispatch an
         //   event to the editor if the isBypassCommand function returns true.
@@ -288,7 +373,7 @@ export default class CompletrPlugin extends Plugin {
             name: '(internal)',
             hotkeys: [
                 {
-                    key: "Enter",
+                    key: "Tab",
                     modifiers: []
                 }
             ],
