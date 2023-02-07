@@ -1,10 +1,10 @@
 {
-    "id": "obsidian-completr",
-    "name": "Completr",
+    "id": "obsidian-completr-by-tema",
+    "name": "Completr by Tema",
     "version": "3.1.3",
     "minAppVersion": "1.0.0",
     "description": "This plugin provides advanced auto-completion functionality for LaTeX, Frontmatter and standard writing.",
-    "author": "tth05",
+    "author": "tth05, Tema Sysoev",
     "authorUrl": "https://github.com/tth05",
-    "isDesktopOnly": true
+    "isDesktopOnly": false
 }
